@@ -1,12 +1,8 @@
 # TargetSkyrmion VTR Visualization
 
-这是一个静态网页可视化项目，用于直接在浏览器中展示 `final.vtr` 中的三维磁化矢量场数据。
-
-在线展示地址：
+Live demo:
 
 https://respsnty.github.io/visualization/
-
-打开网页后会自动加载仓库中的 `final.vtr`，不需要安装 ParaView、Python、Julia 或其他额外软件。
 
 ![VTR viewer demo](docs/viewer-demo.png)
 
