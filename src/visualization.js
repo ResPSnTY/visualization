@@ -409,10 +409,10 @@ export default class Visualization {
     });
     const plane = new THREE.Mesh(geometry, material);
     if (axis === 'x') {
-      plane.rotation.y = Math.PI / 2;
+      orientPlane(plane, new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 1));
       plane.position.x = indexToCenteredPosition(slice, mesh.nx, dims[0]);
     } else if (axis === 'y') {
-      plane.rotation.x = Math.PI / 2;
+      orientPlane(plane, new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 1));
       plane.position.y = indexToCenteredPosition(slice, mesh.ny, dims[1]);
     } else {
       plane.position.z = indexToCenteredPosition(slice, mesh.nz, dims[2]);
@@ -594,6 +594,14 @@ function sampleIndices(total, requested) {
 function indexToCenteredPosition(index, count, dimension) {
   if (count <= 1) return 0;
   return (index / (count - 1) - 0.5) * dimension;
+}
+
+function orientPlane(plane, localXDirection, localYDirection) {
+  const xAxis = localXDirection.clone().normalize();
+  const yAxis = localYDirection.clone().normalize();
+  const zAxis = new THREE.Vector3().crossVectors(xAxis, yAxis).normalize();
+  const matrix = new THREE.Matrix4().makeBasis(xAxis, yAxis, zAxis);
+  plane.quaternion.setFromRotationMatrix(matrix);
 }
 
 function localPositionBounds(positionArray) {
