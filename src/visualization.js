@@ -310,7 +310,7 @@ export default class Visualization {
           matrix.compose(conePosition, quat, scalar);
           cones.setMatrixAt(instance, matrix);
 
-          color.copy(colorForValue(spin[base + componentOffset], -1, 1, this.settings.arrowColormap));
+          color.copy(arrowComponentColor(spin[base + componentOffset], this.settings.arrowColormap));
           shafts.setColorAt(instance, color);
           cones.setColorAt(instance, color);
           instance += 1;
@@ -636,6 +636,13 @@ function colorForValue(value, min, max, mapName) {
   if (mapName === 'plasma') return gradient(t, ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921']);
   if (mapName === 'viridis') return gradient(t, ['#440154', '#3b528b', '#21918c', '#5ec962', '#fde725']);
   return gradient(t, ['#3b4cc0', '#f7f7f7', '#b40426']);
+}
+
+function arrowComponentColor(value, colormap) {
+  if (colormap === 'gray') {
+    return colorForValue(value, 1, -1, 'gray');
+  }
+  return colorForValue(value, -1, 1, colormap);
 }
 
 function spinColor(mx, my, mz, component, colormap) {
