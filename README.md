@@ -6,75 +6,64 @@ https://respsnty.github.io/visualization/
 
 ![VTR viewer demo](docs/viewer-demo.png)
 
-## 展示内容
-
-- 自动读取 `final.vtr` 的 `RectilinearGrid` 数据。
-- 默认显示 `z` 方向中间层的 slice。
-- 默认叠加三维磁化箭头。
-- `(0, 0, 0)` 的背景区域不会显示在 slice、箭头和等值面中。
-- 左下角提供透明背景的 XYZ 坐标轴参考。
-
-## 控制说明
+> **Three-dimensional magnetization by holographic vector field electron tomography**
+>
+> Yi Zhao,<sup>1,2</sup> Weiwei Wang,<sup>3,*</sup> Boyao Lyu,<sup>1</sup> Jan Caron,<sup>4</sup> Shasha Wang,<sup>1</sup> Dongsheng Song,<sup>3</sup> Hongchu Du,<sup>4</sup> Rafal E. Dunin-Borkowski,<sup>4</sup> Haifeng Du,<sup>1,&dagger;</sup> and Fengshan Zheng<sup>5,6,&Dagger;</sup>
+>
+> <sup>1</sup>Anhui Province Key Laboratory of Low-Energy Quantum Materials and Devices, High Magnetic Field Laboratory, HFIPS, Chinese Academy of Sciences, Hefei, Anhui 230031, China  
+> <sup>2</sup>University of Science and Technology of China, Hefei 230026, China  
+> <sup>3</sup>Institutes of Physical Science and Information Technology, Anhui University, Hefei 230601, China  
+> <sup>4</sup>Ernst Ruska-Centre for Microscopy and Spectroscopy with Electrons and Peter Grunberg Institute, Forschungszentrum Julich, Julich 52425, Germany  
+> <sup>5</sup>Spin-X Institute, School of Physics and Optoelectronics, Guangdong-Hong Kong-Macao Joint Laboratory of Optoelectronic and Magnetic Functional Materials, State Key Laboratory of Luminescent Materials and Devices, South China University of Technology, Guangzhou 511442, China  
+> <sup>6</sup>Center for Electron Microscopy, South China University of Technology, Guangzhou 511442, China  
+>
+> Dated: June 17, 2026
 
 ### Display
 
-- `Show Grid`: 显示或隐藏参考网格。
-- `Mesh`: 切换外框显示方式，包括 `outline`、`box` 和 `hidden`。
+- `Show Grid`: Show or hide the reference grid.
+- `Mesh`: Switch the bounding box display mode between `outline`, `box`, and `hidden`.
 
 ### Arrows
 
 - `Mode`
-  - `all`: 在整个三维区域中采样显示箭头。
-  - `layer`: 只显示某一个切片层上的箭头。
-- `Direction`: 在 `layer` 模式下选择层方向，支持 `x`、`y`、`z`。
-- `Index`: 在 `layer` 模式下选择层编号，会根据数据尺寸自动调整范围。
-- `Nx / Ny / Nz`: 控制箭头采样密度。
-- `Size`: 控制箭头大小。
-- `Component`: 用 `mx`、`my` 或 `mz` 分量给箭头着色。
-- `Colormap`: 选择箭头颜色映射。
+  - `all`: Sample arrows throughout the full 3D volume.
+  - `layer`: Show arrows only on one selected slice layer.
+- `Direction`: Select the layer direction in `layer` mode. Supported directions are `x`, `y`, and `z`.
+- `Index`: Select the layer index in `layer` mode. The range is updated automatically from the data dimensions.
+- `Nx / Ny / Nz`: Control the arrow sampling density.
+- `Size`: Control the arrow size.
+- `Component`: Color arrows by the `mx`, `my`, or `mz` component.
+- `Colormap`: Select the arrow colormap.
 
 ### Slice
 
-- `Direction`: 选择切片方向。
-- `Index`: 选择切片层编号。
+- `Direction`: Select the slice direction.
+- `Index`: Select the slice layer index.
 - `Component`
-  - `all-components`: 面内方向使用 HSV 彩色映射，`mz` 用黑白明暗叠加。
-  - `mx / my / mz`: 单独显示对应分量。
-- `Colormap`: 选择 slice 的颜色映射。
-
-`all-components` 的面内颜色相位使用与 ParaView 一致的公式：
-
-```python
--(arctan2(m_y, m_x) + 2*pi) % (2*pi)
-```
+  - `all-components`: Use HSV color for the in-plane magnetization direction, with black/white shading from `mz`.
+  - `mx / my / mz`: Show a single magnetization component.
+- `Colormap`: Select the slice colormap.
 
 ### Isosurface
 
-- `Show`: 开启或关闭等值面。
-- `Component`: 选择 `mx`、`my` 或 `mz` 分量生成等值面。
-- `Value`: 设置等值面数值。
-- `Resolution`: 设置 Marching Cubes 分辨率。数值越高，等值面越细致，但计算更慢。
+- `Show`: Enable or disable the isosurface.
+- `Component`: Generate the isosurface from `mx`, `my`, or `mz`.
+- `Value`: Set the isosurface value.
+- `Resolution`: Set the Marching Cubes resolution. Higher values produce finer surfaces but take longer to compute.
 
-## 加载说明
+## Local Preview
 
-`final.vtr` 大小约为 94 MB。首次打开网页时，浏览器需要下载这个数据文件，因此加载时间取决于网络速度。加载完成后，左上角状态栏会显示网格尺寸：
-
-```text
-Grid 136 x 136 x 111; 2053056 magnetization vectors
-```
-
-## 本地预览
-
-如果要在本地查看，可以在项目目录运行：
+To preview locally, run this command in the project directory:
 
 ```powershell
 python -m http.server 8000
 ```
 
-然后打开：
+Then open:
 
 ```text
 http://127.0.0.1:8000/
 ```
 
-不要直接双击打开 `index.html`，因为浏览器通常会阻止网页读取本地的 `final.vtr` 文件。
+Do not open `index.html` by double-clicking it directly. Most browsers block local pages from reading `final.vtr`.
