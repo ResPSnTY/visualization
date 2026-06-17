@@ -1,5 +1,5 @@
-import { fetchVTR, parseVTR } from './vtr-reader.js?v=20260617-xslice';
-import Visualization from './visualization.js?v=20260617-xslice';
+import { fetchVTR, parseVTR } from './vtr-reader.js?v=20260617-depth';
+import Visualization from './visualization.js?v=20260617-depth';
 
 const loadStatus = document.getElementById('load-status');
 const meshStatus = document.getElementById('mesh-status');

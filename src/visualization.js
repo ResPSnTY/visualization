@@ -405,7 +405,9 @@ export default class Visualization {
       map: texture,
       transparent: true,
       opacity: 0.92,
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      alphaTest: 0.01
     });
     const plane = new THREE.Mesh(geometry, material);
     if (axis === 'x') {
@@ -431,7 +433,8 @@ export default class Visualization {
       color: colorForValue(this.settings.isoValue, -1, 1, 'coolwarm'),
       transparent: true,
       opacity: 0.78,
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      depthWrite: false
     });
     const cubes = new MarchingCubes(resolution, material, false, false, 100000);
     cubes.isolation = this.settings.isoValue;
