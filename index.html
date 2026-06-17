@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VTR Magnetization Viewer</title>
+    <link rel="stylesheet" href="./src/styles.css?v=20260617-axes">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+          "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.18.2/+esm"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="app-shell">
+      <section id="viewer"></section>
+      <aside id="control-panel"></aside>
+      <section id="status-panel" aria-live="polite">
+        <div class="status-title">final.vtr</div>
+        <div id="load-status">Initializing viewer...</div>
+        <div id="mesh-status">Waiting for data</div>
+      </section>
+    </main>
+    <script type="module" src="./src/main.js?v=20260617-axes"></script>
+  </body>
+</html>
