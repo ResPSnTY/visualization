@@ -24,7 +24,7 @@ alphas = [0, 28, 44, 50, 54, 58, 61, 65]
 phasemapper = maglab.PhaseMapper(N, dx, rotation_padding=N).cuda()
 phaseset = maglab.dataset.PhaseSet()
 for alpha in alphas:
-    phasemap = torch.load(f"D:\\Projects\\TargetSkyrmion\\targetdata\\dataset\\dm3_refin\\refin_3dmask_pm\\phasemap_{alpha}.pth", weights_only=False)
+    phasemap = torch.load(f"..\\recon-scripts\\dataset\\dm3_refin\\refin_3dmask_pm\\phasemap_{alpha}.pth", weights_only=False)
     for item in phasemap:
         data  = item['data'].transpose((1,0))
         mask  = item['mask'].transpose((1,0))
@@ -39,7 +39,7 @@ alphas = [x.Euler[0] for x in phaseset]
 betas = [x.Euler[1] for x in phaseset]
 num_phase = len(phaseset)
 
-base_path = 'D:\\Projects\\TargetSkyrmion\\targetdata\\1_test_wphi\\results\\loss0.0e+00_wphi{w:.1e}'
+base_path = '..\\recon-scripts\\test_phi\\results\\loss0.0e+00_wphi{w:.1e}'
 ws = [10**0, 10**0.5, 10**1, 10**1.5, 10**2, 10**2.5, 10**3, 10**3.5, 10**4, 10**4.5, 10**5, 10**5.5, 10**6, 10**6.5, 10**7, 10**7.5, 10**8, 10**8.5, 10**9]
 energy_values = []
 phi_loss_values = []
